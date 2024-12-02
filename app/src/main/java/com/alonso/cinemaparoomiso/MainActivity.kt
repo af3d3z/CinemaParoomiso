@@ -33,7 +33,7 @@ import androidx.room.Room
 import com.alonso.cinemaparoomiso.dal.CineDB
 import com.alonso.cinemaparoomiso.ui.theme.CinemaParoomisoTheme
 import com.alonso.cinemaparoomiso.views.ConfigScreen
-import com.alonso.cinemaparoomiso.views.Salas
+import com.alonso.cinemaparoomiso.views.Sala
 import kotlinx.coroutines.CoroutineScope
 
 class MainActivity : ComponentActivity() {
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                             ConfigScreen(modifier = Modifier.padding(innerPadding), navController)
                         }
                         composable("salas"){
-                            Salas(modifier = Modifier.padding(innerPadding), navController)
+                            Sala(modifier = Modifier.padding(innerPadding), navController)
                         }
                     }
                 }

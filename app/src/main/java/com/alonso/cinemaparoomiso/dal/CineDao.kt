@@ -13,24 +13,42 @@ import com.alonso.cinemaparoomiso.ent.ConfiguracionEntity
 interface CineDao {
     @Query("SELECT * FROM clientes")
     suspend fun getAllClients(): List<ClienteEntity>
+
     @Query("SELECT COUNT(id) FROM clientes WHERE salaElegida == :id")
     suspend fun getClientsByRoom(id: Int): Int
+
     @Query("SELECT * FROM clientes WHERE id == :id")
-    suspend fun getClient(id: Int) : ClienteEntity
+    suspend fun getClient(id: Int): ClienteEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertClient(clienteEntity: ClienteEntity)
+
     @Update
     suspend fun updateClient(clienteEntity: ClienteEntity)
+
     @Delete
     suspend fun deleteClient(clienteEntity: ClienteEntity)
+
+    @Query("SELECT * FROM configuraciones ORDER BY ROWID ASC LIMIT 1")
+    suspend fun getLatestConfig(): ConfiguracionEntity
+
+    @Query("SELECT COUNT(id) FROM clientes WHERE salaElegida == :salaElegida")
+    suspend fun getAsientosOcupadosSala(salaElegida: Int): Int
+
     @Query("SELECT * FROM configuraciones")
     suspend fun getAllConfigs(): List<ConfiguracionEntity>
+
     /*@Query("SELECT * FROM configuraciones WHERE numSalas = :numSalas and numAsientos = :numAsientos")
     suspend fun getConfig(numSalas: Int, numAsientos: Int)*/
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertConfig(configuracionEntity: ConfiguracionEntity)
+
     @Update
     suspend fun updateConfig(configuracionEntity: ConfiguracionEntity)
+
     @Delete
     suspend fun deleteConfig(configuracionEntity: ConfiguracionEntity)
+
+    @Query("DELETE FROM clientes")
+    suspend fun deleteAllClients()
 }
