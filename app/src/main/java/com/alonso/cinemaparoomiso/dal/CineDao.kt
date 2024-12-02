@@ -13,6 +13,8 @@ import com.alonso.cinemaparoomiso.ent.ConfiguracionEntity
 interface CineDao {
     @Query("SELECT * FROM clientes")
     suspend fun getAllClients(): List<ClienteEntity>
+    @Query("SELECT COUNT(id) FROM clientes WHERE salaElegida == :id")
+    suspend fun getClientsByRoom(id: Int): Int
     @Query("SELECT * FROM clientes WHERE id == :id")
     suspend fun getClient(id: Int) : ClienteEntity
     @Insert(onConflict = OnConflictStrategy.REPLACE)
